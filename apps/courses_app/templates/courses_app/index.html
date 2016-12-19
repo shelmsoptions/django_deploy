@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Courses</title>
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static 'courses_app/css/styles.css' %}">
+    </head>
+    <body>
+        <h1>Courses</h1>
+        <!-- {% for course in courses %}
+            <p>{{ course.name }} | {{ course.description }} | {{ course.created_at }} | <a href="/course/{{ course.id }}/delete">Delete</a></p>
+        {% endfor %} -->
+        <form class="" action="{% url 'courses' %}" method="post">
+            {% csrf_token %}
+            <p><label for="name">Name</label></p>
+            <p><input type="text" name="name" value=""></p>
+            <p><label for="description">Description</label></p>
+            <p><textarea name="description" rows="8" cols="80"></textarea></p>
+            <p><input type="submit" name="" value="Add"></p>
+        </form>
+        <table>
+            <thead>
+                <th>Course Name</th>
+                <th>Description</th>
+                <th>Created Date/Time</th>
+                <th>Actions</th>
+            </thead>
+            <tbody>
+                {% for course in courses %}
+                    <tr>
+                        <td>{{ course.name }}</td>
+                        <td>{{ course.description }}</td>
+                        <td>{{ course.created_at }}</td>
+                        <td><a href="{% url 'delete' course.id %}">Delete</a></td>
+                        <!-- <td><a href="/course/{{ course.id }}/delete">Delete</a></td> -->
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
